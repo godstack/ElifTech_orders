@@ -17,7 +17,7 @@ export default class Orders extends Component {
 
   fetchFunc = (pageNo, size) => {
     this.setState({ isLoading: true });
-    console.log("call");
+
     fetch(`/api?pageNo=${pageNo}&size=${size}`)
       .then(res => res.json())
       .then(res => {
