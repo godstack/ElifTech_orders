@@ -256,11 +256,13 @@ export default class Orders extends Component {
   };
 
   render() {
-    const { isLoading } = this.state;
+    const { isLoading, dbData } = this.state;
     return (
       <div>
         {isLoading ? (
           <h1 className="loading">Loading...</h1>
+        ) : dbData.length === 0 ? (
+          <h1 className="loading">Upload some files first</h1>
         ) : (
           this.ordersList()
         )}
