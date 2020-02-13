@@ -169,7 +169,7 @@ router.get("/api", async (req, res) => {
 
     let totalPages = Math.ceil(totalCount / size);
 
-    const response = { message: dbData, pages: totalPages };
+    const response = { message: dbData, pages: totalPages, totalCount };
 
     res.send(JSON.stringify(response));
   } catch (e) {

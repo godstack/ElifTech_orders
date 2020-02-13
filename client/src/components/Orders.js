@@ -11,7 +11,8 @@ export default class Orders extends Component {
       size: 5,
       sizeChoosen: null,
       pages: 0,
-      isLoading: true
+      isLoading: true,
+      totalCount: null
     };
   }
 
@@ -23,6 +24,7 @@ export default class Orders extends Component {
       .then(res => {
         let data = res.message;
         let pages = res.pages;
+        let totalCount = res.totalCount;
         for (let i = 0; i < data.length; i++) {
           for (let key in data[i]) {
             if (key === "date") {
@@ -39,7 +41,8 @@ export default class Orders extends Component {
           pageNoChoosen: pageNo,
           sizeChoosen: size,
           size,
-          pageNo
+          pageNo,
+          totalCount
         });
       });
   };
@@ -181,12 +184,20 @@ export default class Orders extends Component {
   };
 
   render() {
-    const { isLoading, pageNo, pages, pageNoChoosen, sizeChoosen } = this.state;
+    const {
+      isLoading,
+      pageNo,
+      pages,
+      pageNoChoosen,
+      sizeChoosen,
+      totalCount
+    } = this.state;
     return (
       <div>
         <div className="info">
           <h1>
             Page № {pageNo} (of {pages})
+            {isLoading ? "" : `, orders amount ${totalCount}`}
           </h1>
           <div className="choose-wrapper">
             <div className="choose-input">
