@@ -71,7 +71,6 @@ export default class Dropzone extends Component {
           ref={this.fileInputRef}
           className="FileInput"
           type="file"
-          multiple
           accept=".csv"
           onChange={this.onFilesAdded}
         />
