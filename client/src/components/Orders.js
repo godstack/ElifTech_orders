@@ -124,68 +124,9 @@ export default class Orders extends Component {
   };
 
   ordersList = () => {
-    const { dbData, size, pageNo, pages } = this.state;
-    return (
-      <div className="content-wrapper">
-        <div className="orders-wrapper">
-          <div className="order-header">
-            <div className="order-item">Record number</div>
-            <div className="order-item">User email</div>
-            <div className="order-item">Date</div>
-            <div className="order-item">Value</div>
-            <div className="order-item">Currency</div>
-          </div>
-          {dbData.map((item, index) => {
-            let entries = Object.entries(item);
-
-            return (
-              <div className="order" key={index}>
-                <div className="order-item">
-                  {(pageNo - 1) * size + (index + 1)}
-                </div>
-                <div className="order-item">{entries[1][1]}</div>
-                <div className="order-item">{entries[2][1].toDateString()}</div>
-                <div className="order-item">{entries[3][1]}</div>
-                <div className="order-item">{entries[4][1]}</div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="nav-buttons">
-          {pageNo <= 1 ? (
-            ""
-          ) : (
-            <button onClick={() => this.handlePageChangeClick(false)}>
-              Previous page
-            </button>
-          )}
-          {pageNo === pages ? (
-            ""
-          ) : (
-            <button onClick={() => this.handlePageChangeClick(true)}>
-              Next page
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  handlePageChangeClick = boolNext => {
-    let { pageNo, size } = this.state;
-
-    if (boolNext) {
-      pageNo++;
-    } else {
-      pageNo--;
-    }
-
-    this.fetchFunc(pageNo, size);
-  };
-
-  render() {
     const {
-      isLoading,
+      dbData,
+      size,
       pageNo,
       pages,
       pageNoChoosen,
@@ -196,8 +137,7 @@ export default class Orders extends Component {
       <div>
         <div className="info">
           <h1>
-            Page № {pageNo} (of {pages})
-            {isLoading ? "" : `, orders amount ${totalCount}`}
+            Page № {pageNo} (of {pages}), orders amount {totalCount}
           </h1>
           <div className="choose-wrapper">
             <div className="choose-input">
@@ -254,6 +194,71 @@ export default class Orders extends Component {
             </button>
           </div>
         </div>
+
+        <div className="content-wrapper">
+          <div className="orders-wrapper">
+            <div className="order-header">
+              <div className="order-item">Record number</div>
+              <div className="order-item">User email</div>
+              <div className="order-item">Date</div>
+              <div className="order-item">Value</div>
+              <div className="order-item">Currency</div>
+            </div>
+            {dbData.map((item, index) => {
+              let entries = Object.entries(item);
+
+              return (
+                <div className="order" key={index}>
+                  <div className="order-item">
+                    {(pageNo - 1) * size + (index + 1)}
+                  </div>
+                  <div className="order-item">{entries[1][1]}</div>
+                  <div className="order-item">
+                    {entries[2][1].toDateString()}
+                  </div>
+                  <div className="order-item">{entries[3][1]}</div>
+                  <div className="order-item">{entries[4][1]}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="nav-buttons">
+            {pageNo <= 1 ? (
+              ""
+            ) : (
+              <button onClick={() => this.handlePageChangeClick(false)}>
+                Previous page
+              </button>
+            )}
+            {pageNo === pages ? (
+              ""
+            ) : (
+              <button onClick={() => this.handlePageChangeClick(true)}>
+                Next page
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  handlePageChangeClick = boolNext => {
+    let { pageNo, size } = this.state;
+
+    if (boolNext) {
+      pageNo++;
+    } else {
+      pageNo--;
+    }
+
+    this.fetchFunc(pageNo, size);
+  };
+
+  render() {
+    const { isLoading } = this.state;
+    return (
+      <div>
         {isLoading ? (
           <h1 className="loading">Loading...</h1>
         ) : (
