@@ -1,4 +1,4 @@
 {
-  "port": 5000,
+  "port": 9000,
   "mongoUri": "mongodb+srv://godlexa:1mongoose1@cluster0-0ssvk.azure.mongodb.net/app?retryWrites=true&w=majority"
 }
