@@ -4,18 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "client-install": "cd ../client &&npm install",
     "client": "cd ../client && npm start ",
+    "client:build": "cd ../client && npm run build",
     "server-prod": "node app.js",
     "server": "nodemon app.js",
-    "start": "node app.js",
-    "dev": "concurrently --kill-others  \"npm run client\" \"npm run server\" "
+    "start": "cross-env NODE_ENV=production  node app.js",
+    "dev": "cross-env NODE_ENV=development concurrently --kill-others  \"npm run client\" \"npm run server\" "
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "config": "^3.2.5",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.0",
     "csv-parser": "^2.3.2",
     "express": "^4.17.1",
     "express-validator": "^6.4.0",
