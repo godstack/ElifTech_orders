@@ -10,7 +10,8 @@
     "server-prod": "node app.js",
     "server": "nodemon app.js",
     "start": "cross-env NODE_ENV=production  node app.js",
-    "dev": "cross-env NODE_ENV=development concurrently --kill-others  \"npm run client\" \"npm run server\" "
+    "dev": "cross-env NODE_ENV=development concurrently --kill-others  \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd ../client && npm install  && cd ../client  && npm run build"
   },
   "author": "",
   "license": "ISC",
