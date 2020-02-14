@@ -29,6 +29,7 @@ export default class Orders extends Component {
           for (let key in data[i]) {
             if (key === "date") {
               data[i][key] = new Date(data[i][key]);
+              data[i].record_number = (pageNo - 1) * size + (i + 1);
               break;
             }
           }
@@ -125,7 +126,6 @@ export default class Orders extends Component {
   ordersList = () => {
     const {
       dbData,
-      size,
       pageNo,
       pages,
       pageNoChoosen,
@@ -170,6 +170,18 @@ export default class Orders extends Component {
         <div className="sorting-wrapper">
           <div className="sorting-item">
             <p>
+              Sort orders by <i>RECORD NUMBER</i>
+            </p>
+
+            <button onClick={() => this.handleSort(1, "record_number")}>
+              Ascending sort
+            </button>
+            <button onClick={() => this.handleSort(-1, "record_number")}>
+              Descending sort
+            </button>
+          </div>
+          <div className="sorting-item">
+            <p>
               Sort orders by <i>VALUES</i>
             </p>
 
@@ -208,9 +220,7 @@ export default class Orders extends Component {
 
               return (
                 <div className="order" key={index}>
-                  <div className="order-item">
-                    {(pageNo - 1) * size + (index + 1)}
-                  </div>
+                  <div className="order-item">{entries[6][1]}</div>
                   <div className="order-item">{entries[1][1]}</div>
                   <div className="order-item">
                     {entries[2][1].toDateString()}
@@ -256,6 +266,7 @@ export default class Orders extends Component {
 
   render() {
     const { isLoading, dbData } = this.state;
+    console.log(dbData);
     return (
       <div>
         {isLoading ? (
