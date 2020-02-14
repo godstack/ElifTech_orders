@@ -182,18 +182,6 @@ export default class Orders extends Component {
           </div>
           <div className="sorting-item">
             <p>
-              Sort orders by <i>VALUES</i>
-            </p>
-
-            <button onClick={() => this.handleSort(1, "value")}>
-              Ascending sort
-            </button>
-            <button onClick={() => this.handleSort(-1, "value")}>
-              Descending sort
-            </button>
-          </div>
-          <div className="sorting-item">
-            <p>
               Sort orders by <i>Dates</i>
             </p>
 
@@ -201,6 +189,18 @@ export default class Orders extends Component {
               Ascending sort
             </button>
             <button onClick={() => this.handleSort(-1, "date")}>
+              Descending sort
+            </button>
+          </div>
+          <div className="sorting-item">
+            <p>
+              Sort orders by <i>VALUES</i>
+            </p>
+
+            <button onClick={() => this.handleSort(1, "value")}>
+              Ascending sort
+            </button>
+            <button onClick={() => this.handleSort(-1, "value")}>
               Descending sort
             </button>
           </div>
