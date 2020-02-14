@@ -90,17 +90,16 @@ export default class Orders extends Component {
     this.fetchFunc(pageNoChoosen, size);
   };
 
-  handleSort = (sortType, isValuesSort) => {
+  handleSort = (sortType, WhatToSort) => {
     let { dbData } = this.state;
-    let itemToCompare = isValuesSort ? "value" : "date";
 
     if (sortType === 1) {
       dbData = dbData.sort((a, b) => {
-        if (a[itemToCompare] < b[itemToCompare]) {
+        if (a[WhatToSort] < b[WhatToSort]) {
           return -1;
         }
 
-        if (a[itemToCompare] > b[itemToCompare]) {
+        if (a[WhatToSort] > b[WhatToSort]) {
           return 1;
         }
 
@@ -108,11 +107,11 @@ export default class Orders extends Component {
       });
     } else if (sortType === -1) {
       dbData = dbData.sort((a, b) => {
-        if (a[itemToCompare] < b[itemToCompare]) {
+        if (a[WhatToSort] < b[WhatToSort]) {
           return 1;
         }
 
-        if (a[itemToCompare] > b[itemToCompare]) {
+        if (a[WhatToSort] > b[WhatToSort]) {
           return -1;
         }
 
@@ -174,10 +173,10 @@ export default class Orders extends Component {
               Sort orders by <i>VALUES</i>
             </p>
 
-            <button onClick={() => this.handleSort(1, true)}>
+            <button onClick={() => this.handleSort(1, "value")}>
               Ascending sort
             </button>
-            <button onClick={() => this.handleSort(-1, true)}>
+            <button onClick={() => this.handleSort(-1, "value")}>
               Descending sort
             </button>
           </div>
@@ -186,10 +185,10 @@ export default class Orders extends Component {
               Sort orders by <i>Dates</i>
             </p>
 
-            <button onClick={() => this.handleSort(1, false)}>
+            <button onClick={() => this.handleSort(1, "date")}>
               Ascending sort
             </button>
-            <button onClick={() => this.handleSort(-1, false)}>
+            <button onClick={() => this.handleSort(-1, "date")}>
               Descending sort
             </button>
           </div>
