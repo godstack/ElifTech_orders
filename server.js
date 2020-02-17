@@ -2,7 +2,7 @@ const express = require("express");
 const config = require("config");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const path = "path";
+const path = require("path");
 
 const corsOptions = {
   origin: "*",
@@ -13,15 +13,9 @@ const app = express();
 
 app.use(cors(corsOptions));
 
+app.use(express.static(path.join(__dirname, "client", "build")));
+
 app.use("/", require("./routes/order.routes"));
-
-if (process.env.NODE_ENV === "production") {
-  app.use("/", express.static(path.join(__dirname, "../client", "build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-  });
-}
 
 const PORT = config.get("port") || 9000;
 
@@ -41,5 +35,9 @@ async function start() {
     process.exit(1);
   }
 }
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 start();
