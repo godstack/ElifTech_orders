@@ -13,11 +13,13 @@ const app = express();
 
 app.use(cors(corsOptions));
 
-app.use(express.static(path.join(__dirname, "client", "build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 app.use("/", require("./routes/order.routes"));
 
-const PORT = config.get("port") || 9000;
+const PORT = process.env.PORT || 9000;
 
 async function start() {
   try {

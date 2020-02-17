@@ -1,4 +1,4 @@
 {
   "port": 9000,
-  "mongoUri": "mongodb+srv://godlexa:1mongoose1@cluster0-0ssvk.azure.mongodb.net/app?retryWrites=true&w=majority"
+  "mongoUri": "mongodb://godlexa:1mongoose1@ds211613.mlab.com:11613/heroku_z0078dsh"
 }

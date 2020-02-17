@@ -266,7 +266,6 @@ export default class Orders extends Component {
 
   render() {
     const { isLoading, dbData } = this.state;
-    console.log(dbData);
     return (
       <div>
         {isLoading ? (
