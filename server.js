@@ -27,6 +27,10 @@ async function start() {
       useCreateIndex: true
     });
 
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    });
+
     app.listen(PORT, () => {
       console.log(`App has been started on port ${PORT}...`);
     });
@@ -35,9 +39,5 @@ async function start() {
     process.exit(1);
   }
 }
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
 
 start();
