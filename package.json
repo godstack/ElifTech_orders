@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client-install": "cd ../client &&npm install",
-    "client": "cd ../client && npm start ",
-    "client:build": "cd ../client && npm run build",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "client:build": "npm run build --prefix client",
     "server-prod": "node app.js",
     "server": "nodemon app.js",
     "start": "cross-env NODE_ENV=production  node app.js",
     "dev": "cross-env NODE_ENV=development concurrently --kill-others  \"npm run client\" \"npm run server\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd ../client && npm install  && cd ../client  && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client  && cd ../client  && npm run build"
   },
   "author": "",
   "license": "ISC",
